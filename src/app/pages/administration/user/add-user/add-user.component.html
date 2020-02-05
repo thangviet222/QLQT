@@ -1,0 +1,32 @@
+<nb-card>
+    <nb-card-header>Enter User Information</nb-card-header>
+    <nb-card-body>
+        <input type="text" #name nbInput fullWidth full required placeholder="User Name">
+        <input type="text" #name nbInput fullWidth placeholder="Lowered User Name">
+        <div class="full-name-inputs">
+            <input type="text" #name nbInput fullWidth placeholder="Surname">
+            <input type="text" #name nbInput fullWidth placeholder="Given Name">
+        </div>
+        <div class="full-name-inputs">
+            <input type="number" #name nbInput fullWidth required placeholder="Mobile Alias">
+            <nb-select placeholder="User Type">
+                <nb-option value="1">Admin</nb-option>
+                <nb-option value="2">Member</nb-option>
+            </nb-select>
+            <nb-checkbox status="basic">Anonymous</nb-checkbox>
+        </div>
+        <div class="full-name-inputs">
+            <input type="password" #name nbInput fullWidth placeholder="New Password">
+            <input type="password" #name nbInput fullWidth placeholder="Reinput New Password">
+        </div>
+        <div class="validation-checkboxes">
+            <nb-checkbox status="success">Admin</nb-checkbox>
+            <nb-checkbox status="warning">PM</nb-checkbox>
+        </div>
+
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="cancel" nbButton status="danger" (click)="cancel()">Cancel</button>
+        <button nbButton status="success" (click)="submit(name.value)">Submit</button>
+    </nb-card-footer>
+</nb-card>

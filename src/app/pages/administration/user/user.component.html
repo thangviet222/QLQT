@@ -1,0 +1,27 @@
+<nb-card>
+    <nb-card-header>
+        <button (click)="openDialogAddUser()" size="small" nbButton status="primary">
+            <nb-icon icon="person-add-outline"></nb-icon>Add New
+        </button>
+    </nb-card-header>
+    <nb-card-body>
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Mobile</th>
+                    <th scope="col">Last Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of listUsers">
+                    <th scope="row">{{user.userId}}</th>
+                    <td>{{user.username}}</td>
+                    <td>{{user.mobileAlias}}</td>
+                    <td>{{user.lastActivityDate | date: 'MMMM d, y, h:mm:ss a z'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </nb-card-body>
+</nb-card>

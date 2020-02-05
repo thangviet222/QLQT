@@ -1,0 +1,62 @@
+<nb-card [nbSpinner]="!details" nbSpinnerStatus="info">
+    <nb-card-header>{{process.taskName}}</nb-card-header>
+    <nb-card-body>
+        <table class="table table-borderless">
+            <tbody *ngIf="details">
+                <tr>
+                    <td>ID</td>
+                    <td>{{details.id}}</td>
+                </tr>
+                <tr>
+                    <td>Priority</td>
+                    <td>{{details.priority}}</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{details.name}}</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>{{details.description}}</td>
+                </tr>
+                <tr>
+                    <td>Actual Owner</td>
+                    <td>{{details.actualOwner}}</td>
+                </tr>
+                <tr>
+                    <td>Created By</td>
+                    <td>{{details.createdBy}}</td>
+                </tr>
+                <tr>
+                    <td>Created On</td>
+                    <td>{{details.createdOn}}</td>
+                </tr>
+                <tr>
+                    <td>Expiration Time</td>
+                    <td>{{details.expirationTime}}</td>
+                </tr>
+                <tr>
+                    <td>ActivatiOn Time</td>
+                    <td>{{details.activatiOnTime}}</td>
+                </tr>
+                <tr>
+                    <td>Finish Date</td>
+                    <td>{{details.finishDate}}</td>
+                </tr>
+                <tr>
+                    <td>Process Definition</td>
+                    <td>{{details.processDefinitionId}}</td>
+                </tr>
+                <tr>
+                    <td>Container</td>
+                    <td>{{details.containerId}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="cancel" nbButton status="primary" (click)="cancel()">Close</button>
+    </nb-card-footer>
+</nb-card>

@@ -1,0 +1,13 @@
+<nb-card [nbSpinner]="unloaded" nbSpinnerStatus="info">
+    <nb-card-header>
+      Smart Table
+    </nb-card-header>
+  
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings" [source]="source" >
+      </ng2-smart-table>
+    </nb-card-body>
+    <nb-card-footer>
+      <button class="cancel" nbButton status="primary" (click)="cancel()">Close</button>
+  </nb-card-footer>
+  </nb-card>

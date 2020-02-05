@@ -6,6 +6,9 @@ import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
@@ -38,14 +41,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private themeService: NbThemeService,
-              private userService: UserData,
-              private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+    private menuService: NbMenuService,
+    private themeService: NbThemeService,
+    private userService: UserData,
+    private layoutService: LayoutService,
+    private breakpointService: NbMediaBreakpointsService,
+    private authService: NbAuthService,
+    private router: Router) {
+    this.authService.onTokenChange().subscribe(
+      (token: NbAuthJWTToken) => {
+        if (token.isValid()) {
+          this.user = token.getPayload();
+        }
+      }
+    )
   }
 
   ngOnInit() {
@@ -53,7 +65,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.userService.getUsers()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
+      .subscribe((users: any) => {
+        let name = this.user.sub;
+        this.user.name = name
+      });
+    
+    this.menuService.onItemClick().subscribe((event)=>{
+      if(event.item.title === 'Log out'){
+        this.router.navigate(['auth/logout'])
+      }
+    })
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()

@@ -23,15 +23,21 @@ import {
   NbInputModule,
   NbButtonModule,
   NbCheckboxModule,
+  NbCardModule,
+  NbLayoutModule,
 } from '@nebular/theme';
 import { LoginAuthComponent } from './login-auth/login-auth.component';
 import { FormsModule } from '@angular/forms';
-import { NbAuthModule, NbPasswordAuthStrategy } from '@nebular/auth';
+import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken } from '@nebular/auth';
+import { AuthwrapperComponent } from './authwrapper/authwrapper.component';
+import { AuthGuard } from './auth-guard.service';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [AppComponent, LoginAuthComponent],
+  declarations: [AppComponent, LoginAuthComponent, AuthwrapperComponent],
   imports: [
     BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
@@ -41,6 +47,8 @@ import { NbAuthModule, NbPasswordAuthStrategy } from '@nebular/auth';
     NbInputModule,
     NbButtonModule,
     NbCheckboxModule,
+    NbCardModule,
+    NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
@@ -55,20 +63,39 @@ import { NbAuthModule, NbPasswordAuthStrategy } from '@nebular/auth';
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
-
-          baseEndpoint: '',
-           login: {
-             // ...
-             endpoint: '/api/auth/login',
-           },
-           register: {
-             // ...
-             endpoint: '/api/auth/register',
-           },
+          token: {
+            class: NbAuthJWTToken,
+            key: 'authToken'
+          },
+          baseEndpoint: 'http://10.60.19.46:8081/redmine-jbpm-intergration/api/v1/adm',
+          login: {
+            redirect: {
+              success: '/pages/dashboard',
+              failure: null
+            },
+            endpoint: '/login',
+            
+          },
+          logout: {
+            redirect: {
+              success:'/auth/login',
+              failure: null
+            },
+            endpoint: '/logout'
+          }
         }),
       ],
-      forms: {},
+      forms: {
+        login: {
+          redirectDelay: 0,
+          
+        }
+      },
+      
     }),
+  ],
+  providers: [
+    AuthGuard
   ],
   bootstrap: [AppComponent],
 })
