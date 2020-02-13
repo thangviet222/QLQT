@@ -8,12 +8,15 @@ import { ProcessManagerRoutingModule } from "./ProcessManagerRoutingModule.modul
 import { ProcessManagerService } from './process-manager.service';
 import { FormsModule } from '@angular/forms';
 import { ThemeModule } from '../../@theme/theme.module';
-import { NbCardModule, NbIconModule, NbButtonModule, NbDialogModule, NbSpinnerModule, NbInputModule } from '@nebular/theme';
+import { NbCardModule, NbIconModule, NbButtonModule, NbDialogModule, NbSpinnerModule, NbInputModule, NbCheckboxModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DetailsComponent } from './time/details/details.component';
 import { TaskComponent } from './history/task/task.component';
 import { DetailComponent } from './manager/detail/detail.component';
 import { ManagerService } from './manager/manager.service';
+import { TemplateComponent } from './manager/detail/template/template.component';
+import { TemplateService } from './manager/detail/template/template.service';
+import { TemplatePreviewComponent } from './manager/detail/template/template-preview/template-preview.component';
 
 @NgModule({
     imports:[
@@ -26,7 +29,8 @@ import { ManagerService } from './manager/manager.service';
         NbIconModule,
         NbButtonModule,
         NbSpinnerModule,
-        NbInputModule
+        NbInputModule,
+        NbCheckboxModule,
     ],
     declarations:[
         ProcessManagerComponent,
@@ -36,16 +40,21 @@ import { ManagerService } from './manager/manager.service';
         ProjectIssueComponent,
         DetailsComponent,
         TaskComponent,
-        DetailComponent
+        DetailComponent,
+        TemplateComponent,
+        TemplatePreviewComponent
     ],
     providers:[
         ProcessManagerService,
-        ManagerService
+        ManagerService,
+        TemplateService
     ],
     entryComponents:[
         DetailsComponent,
         TaskComponent,
-        DetailComponent
+        DetailComponent,
+        TemplateComponent,
+        TemplatePreviewComponent
     ]
 })
 export class ProcessManagerModule {}

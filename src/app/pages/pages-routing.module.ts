@@ -11,14 +11,6 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
-      path: 'dashboard',
-      component: ECommerceComponent,
-    },
-    {
-      path: 'iot-dashboard',
-      component: DashboardComponent,
-    },
-    {
       path: 'administration',
       loadChildren: () => import('./administration/administration.module')
       .then(m => m.AdministratorModule)
@@ -30,7 +22,7 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'administration',
       pathMatch: 'full',
     },
     {

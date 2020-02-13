@@ -32,6 +32,7 @@ import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken } from '@nebular/a
 import { AuthwrapperComponent } from './authwrapper/authwrapper.component';
 import { AuthGuard } from './auth-guard.service';
 import { CommonModule } from '@angular/common';
+import { endpoint } from '../assets/config/endpoint';
 
 @NgModule({
   declarations: [AppComponent, LoginAuthComponent, AuthwrapperComponent],
@@ -67,18 +68,18 @@ import { CommonModule } from '@angular/common';
             class: NbAuthJWTToken,
             key: 'authToken'
           },
-          baseEndpoint: 'http://10.60.19.46:8081/redmine-jbpm-intergration/api/v1/adm',
+          baseEndpoint: endpoint + '/redmine-jbpm-intergration/api/v1/adm',
           login: {
             redirect: {
-              success: '/pages/dashboard',
+              success: '/pages/administration/user',
               failure: null
             },
             endpoint: '/login',
-            
+
           },
           logout: {
             redirect: {
-              success:'/auth/login',
+              success: '/auth/login',
               failure: null
             },
             endpoint: '/logout'
@@ -88,10 +89,10 @@ import { CommonModule } from '@angular/common';
       forms: {
         login: {
           redirectDelay: 0,
-          
+
         }
       },
-      
+
     }),
   ],
   providers: [

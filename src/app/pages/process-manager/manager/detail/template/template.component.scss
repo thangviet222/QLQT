@@ -1,0 +1,24 @@
+@import '../../../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  nb-card-body {
+    overflow: visible;
+    padding-top: 0;
+
+    >* {
+      margin-top: 1rem;
+    }
+
+    width: 75vw;
+    height: 50vh;
+  }
+
+  .cancel {
+    margin-right: 1rem;
+  }
+  input{
+    margin-left: 1rem;
+    width: 80vw;
+  }
+
+}

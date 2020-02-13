@@ -1,31 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { NbAuthService } from '@nebular/auth';
-import { forkJoin } from 'rxjs';
-
+import { switchMap } from 'rxjs/operators';
+import { endpoint } from "../../../assets/config/endpoint";
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessManagerService {
 
   token
-  baseAPI = 'http://localhost:8081/redmine-jbpm-intergration/api/v1/'
+  baseAPI = endpoint + '/redmine-jbpm-intergration/api/v1/'
   constructor(private http: HttpClient,
     private nbAuthService: NbAuthService) {
     this.nbAuthService.getToken().subscribe(data => this.token = data.getValue())
   }
 
-  getProcessTime(page, size,source) {
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json;charset=UTF-8',
-    //     'Authorization': 'Bearer ' + this.token
-    //   }),
-    //   params: new HttpParams().set('page', page).set('size', size)
-    // };
-    // return this.http.get(this.baseAPI + 'task/spendtime', httpOptions)
-    this.nbAuthService.getToken().subscribe(
-      data => {
+  getProcessTime(page, size) {
+
+    return this.nbAuthService.getToken().pipe(
+      switchMap(data => {
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type': 'application/json;charset=UTF-8',
@@ -33,14 +26,10 @@ export class ProcessManagerService {
           }),
           params: new HttpParams().set('page', page).set('size', size)
         };
-        return this.http.get(this.baseAPI + 'task/spendtime', httpOptions).subscribe(
-          data =>{
-            source.load(data['data'].content)
-          }
-        )
-      }
+        return this.http.get(this.baseAPI + 'task/spendtime', httpOptions)
+      })
     )
-   
+
   }
 
   getProcessTimeDetails(id) {

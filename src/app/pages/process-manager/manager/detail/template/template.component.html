@@ -1,0 +1,15 @@
+<nb-card [nbSpinner]="unloaded" nbSpinnerStatus="info">
+  <nb-card-header>
+    <span class="text-primary"> Upload Template</span>
+    <input type="file" accept=".bpmn" (change)="handleFileInput($event.target.files)" (click)="clear()"
+      [(ngModel)]="filename" nbInput status="control" placeholder="Control">
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (editConfirm)="onEditConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="cancel" nbButton status="info" (click)="cancel()">Close</button>
+  </nb-card-footer>
+</nb-card>

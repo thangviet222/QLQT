@@ -49,7 +49,11 @@ export class TimeComponent implements OnInit {
     private processManagerService: ProcessManagerService,
     private dialogService: NbDialogService
   ) {
-    this.processManagerService.getProcessTime('0', '1000',this.source)
+    this.processManagerService.getProcessTime('0', '1000').subscribe(
+      result => {
+        this.source.load(result['data'].content)
+      }
+    )
     // console.log(this.processManagerService.getProcessTime(0, 1000));
 
   }

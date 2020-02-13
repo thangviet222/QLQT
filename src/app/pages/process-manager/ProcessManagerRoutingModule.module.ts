@@ -26,6 +26,11 @@ export const routes: Routes = [{
             path: 'project-issue',
             component: ProjectIssueComponent
         },
+        {
+            path: '',
+            redirectTo: 'time',
+            pathMatch: 'full',
+        }
     ]
 }]
 @NgModule({

@@ -31,10 +31,15 @@ const routes: Routes = [{
             path: 'access',
             component: AccessComponent
         },
+        {
+            path: '',
+            redirectTo: 'user',
+            pathMatch: 'full',
+        }
     ]
 }]
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class AdministrationRoutingModule {}
+export class AdministrationRoutingModule { }

@@ -123,7 +123,7 @@ export class ManagerComponent implements OnInit {
   }
   onCustomAction(event) {
     console.log(event);
-       this.dialogService.open(DetailComponent,{context:{id:event.data.id}})
+       this.dialogService.open(DetailComponent,{context:{id:event.data.id,processname:event.data.name}})
   }
 
 }
