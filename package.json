@@ -55,7 +55,7 @@
     "core-js": "2.5.1",
     "echarts": "^4.6.0",
     "eva-icons": "^1.1.2",
-    "highcharts": "^8.0.0",
+    "highcharts": "^9.0.0",
     "intl": "1.2.5",
     "ionicons": "2.0.1",
     "leaflet": "1.2.0",
